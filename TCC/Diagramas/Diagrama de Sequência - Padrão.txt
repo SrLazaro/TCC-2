@@ -1,0 +1,42 @@
+@startuml
+title Diagrama de Sequência - Processo de Criação de Programa Customizado de Criação Massiva de Pedido de Compra no SAP
+
+actor Usuario
+actor Funcional
+actor Desenvolvedor
+
+== Requisição ==
+Usuario -> Funcional : Solicita a criação do programa por importação de planilha
+
+== Análise Funcional ==
+Funcional -> Funcional : Analisa dados da planilha
+Funcional -> Usuario : Esclarece dúvidas e refina entendimento (se necessário)
+Funcional -> Funcional : Elabora Especificação Funcional\n(define estrutura da planilha e BAPI a ser usada)
+Funcional -> Desenvolvedor : Envia documento da especificação funcional
+
+== Desenvolvimento ==
+Desenvolvedor -> Desenvolvedor : Lê e interpreta a especificação
+Desenvolvedor -> Funcional : Refina entendimento e mapeia a BAPI (se necessário)
+Desenvolvedor -> Desenvolvedor : Desenvolve o programa solicitado
+Desenvolvedor -> Funcional : Envia programa para testes funcionais
+
+== Testes Funcionais ==
+Funcional -> Funcional : Executa testes no programa
+
+alt Teste com erro
+    Funcional -> Desenvolvedor : Reporta erro para correção
+    Desenvolvedor -> Desenvolvedor : Corrige conforme solicitado
+    Desenvolvedor -> Funcional : Reenvia para novo teste
+end
+
+alt Teste com sucesso
+    Funcional -> Usuario : Solicita validação final do usuário
+
+    alt Usuário aprova
+        Usuario -> Funcional : Aprova e autoriza subida da melhoria
+    else Usuário reprova
+        Usuario -> Funcional : Solicita revisão dos testes
+    end
+end
+
+@enduml

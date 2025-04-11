@@ -1,0 +1,45 @@
+@startuml
+title Diagrama de Sequência - Processo de Criação de Programa Customizado de Criação Massiva via planilha no SAP com utilização de IA
+
+actor Usuario
+actor Funcional
+actor IA
+actor Desenvolvedor
+
+== Requisição ==
+Usuario -> Funcional : Solicita a criação do programa por importação de planilha
+
+== Análise Funcional ==
+Funcional -> Funcional : Analisa dados da planilha
+Funcional -> Usuario : Esclarece dúvidas e refina entendimento (se necessário)
+Funcional -> Funcional : Elabora Especificação Funcional\n(define estrutura da planilha e BAPI a ser usada)
+Funcional -> IA : Envia dados da planilha e nome da BAPI
+
+== Geração Automática ==
+IA -> IA : Processa entrada, mapeia a BAPI e gera o código ABAP automaticamente
+IA -> Desenvolvedor : Entrega o código gerado para validação e ajustes finais
+
+== Ajustes e Testes ==
+Desenvolvedor -> Desenvolvedor : Valida e ajusta o código gerado (se necessário)
+Desenvolvedor -> Funcional : Envia programa para testes funcionais
+
+== Testes Funcionais ==
+Funcional -> Funcional : Executa testes no programa
+
+alt Teste com erro
+    Funcional -> Desenvolvedor : Reporta erro para ajustes
+    Desenvolvedor -> Desenvolvedor : Corrige e ajusta código
+    Desenvolvedor -> Funcional : Reenvia para novo teste
+end
+
+alt Teste com sucesso
+    Funcional -> Usuario : Solicita validação final do usuário
+
+    alt Usuário aprova
+        Usuario -> Funcional : Aprova e autoriza subida da melhoria
+    else Usuário reprova
+        Usuario -> Funcional : Solicita revisão dos testes
+    end
+end
+
+@enduml

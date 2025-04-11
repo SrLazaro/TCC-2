@@ -1,0 +1,29 @@
+@startuml
+title Diagrama de Atividade - Processo ABAP com BAPI e Planilha
+
+start
+
+:Criar variáveis e tipos de estruturas;
+:Chamar função para ler arquivo da planilha;
+
+:Processar dados da planilha (LOOP);
+:Verificar grupo da linha (cabeçalho, item, etc);
+:Converter dados da planilha;
+:Inserir valores nas tabelas internas\nno formato esperado pela BAPI;
+
+:Processar tabela interna com dados convertidos (LOOP);
+:Chamar BAPI;
+
+if (Sucesso na execução da BAPI?) then (Sim)
+  :Chamar função COMMIT WORK;
+else (Não)
+  :Tratar mensagens de erro;
+endif
+
+:Inserir dados na tabela interna de log;
+
+:Gravar dados na tabela de transporte de log;
+:Exibir relatório ALV com o log de processamento;
+
+stop
+@enduml
