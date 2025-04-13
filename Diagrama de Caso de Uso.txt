@@ -1,0 +1,40 @@
+@startuml
+title Diagrama de Caso de Uso - Execução de BAPI no SAP (Processo Tradicional)
+
+actor "Usuário" as Usuario
+actor "Desenvolvedor" as Dev
+actor "Analista Funcional" as Func
+
+rectangle "Sistema SAP ECC" {
+
+  ' Ações do usuário
+  usecase "Acessar transação SAP" as UC1
+  usecase "Importar dados" as UC2
+  usecase "Visualizar log de execução" as UC3
+
+  ' Processo tradicional
+  usecase "Especificar requisitos do programa" as UC4
+  usecase "Desenvolver programa ABAP" as UC5
+  usecase "Executar BAPI" as UC6
+  usecase "Registrar log da execução" as UC7
+  usecase "Apoiar testes com o usuário" as UC8
+}
+
+' Interações do usuário
+Usuario --> UC1
+Usuario --> UC2
+Usuario --> UC3
+
+' Processo tradicional
+Func --> UC4
+Func --> UC8
+
+Dev --> UC5
+UC5 --> UC6
+UC6 --> UC7
+UC7 --> UC3
+
+Func --> UC5 : "colabora"
+Func --> UC3
+
+@enduml
